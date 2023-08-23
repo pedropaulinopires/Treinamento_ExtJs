@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../extjs/resources/css/ext-all.css">
+    <script type="text/javascript" src="../extjs/ext-all-dev.js"></script>
+    <title>Document</title>
+</head>
+
+<body>
+
+    <script>
+        //criando a classe 
+        Ext.define("Usuario", {
+            usuario: "",
+            senha: "",
+            constructor: function (option) {
+                Ext.apply(this, option || {})
+            },
+            logar: function () {
+                console.log("logando")
+            },
+            logout: function () {
+                console.log("deslogando")
+            }
+        })
+
+        Ext.onReady(function () {
+            const usuario = Ext.create("Usuario",{nome:"pedro",usuario:"pedro123"})
+            console.log(usuario)
+            
+        });
+
+
+
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../extjs/resources/css/ext-all.css">
+    <script type="text/javascript" src="../extjs/ext-all.js"></script>
+    <title>Herança simples</title>
+</head>
+
+<body>
+
+</body>
+<script>
+    Ext.define('MeuBotao', {
+        extend: 'Ext.button.Button',
+        initComponent: function () {
+            this.text = "Button"
+            this.renderTo = Ext.getBody()
+            this.callParent()
+        }
+    });
+
+    Ext.onReady(function () {
+        Ext.create('MeuBotao')
+        Ext.create('MeuBotao')
+        Ext.create('MeuBotao')
+    });
+</script>
+
+</html>

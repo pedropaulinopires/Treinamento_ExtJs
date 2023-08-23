@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../extjs/resources/css/ext-all.css">
+    <script text="text/javascript" src="../extjs/ext-all.js"></script>
+    <title>Aula 7</title>
+</head>
+<body>
+    
+    <script>
+        Ext.define("Aula7.mixins.Ligar",{
+            ligar: function(){
+                console.log("Ligando...")
+            }
+        })
+        Ext.define("Aula7.mixins.Desligar",{
+            desligar:function(){
+                console.log("desligando...")
+            }
+        })
+
+        Ext.define("Aula7.automovel.Carro",{
+            mixins:{
+                ligarCarro: "Aula7.mixins.Ligar",
+                desligarCarro: "Aula7.mixins.Desligar"
+            }
+        })
+        const carro = Ext.create("Aula7.automovel.Carro")
+        carro.ligar();
+        carro.desligar();
+    </script>
+</body>
+</html>

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../extjs/resources/css/ext-all.css">
+    <script type="text/javascript" src="../extjs/ext-all.js"></script>
+    <title>Aula 08</title>
+</head>
+
+<body>
+
+    <script>
+        Ext.define("Aula08.componente.MeuBotao", {
+            extend: "Ext.button.Button",
+            renderTo: Ext.getBody(),
+            text: "click",
+            alias: "widget.btn"
+
+        })
+
+        Ext.onReady(function () {
+            const window = Ext.create('Ext.window.Window', {
+                title: 'Hello',
+                height: 600,
+                width: 1200,
+                items: {  
+                    xtype:"btn",
+                    text:"click"
+                }
+            }).show();
+
+            
+        });
+    </script>
+</body>
+
+</html>

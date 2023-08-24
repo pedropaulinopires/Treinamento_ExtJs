@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../extjs/resources/css/ext-all.css">
+    <script type="text/javascript" src="../extjs/ext-all.js"></script>
+    <title>Aula18</title>
+</head>
+
+<body>
+
+    <script>
+        let usuarios = [
+            { id: 1, nome: 'pedro' },
+            { id: 2, nome: 'rafael' },
+            { id: 3, nome: 'gabriel' },
+            { id: 4, nome: 'matheus' }
+        ]
+        usuarios.map((ele)=>{
+            JSON.stringify(ele)
+        })
+        Ext.define("Usuario", {
+            extend: 'Ext.data.Model',
+            fields:['id','nome']
+        })
+        Ext.define('MemorySession', {
+            extend: 'Ext.data.Store',
+            model: 'Usuario',
+            data: usuarios,
+            proxy: {
+                type: 'memory',
+                format: 'json'
+            }
+
+        })
+
+        Ext.onReady(function () {
+            let memorySession = Ext.create('MemorySession').data.items
+
+            let tpl = Ext.create('Ext.XTemplate',
+                '<p>Usuarios: </p>',
+                '<tpl for=".">',
+                '<p>{data.id} - {data.nome}</p>',
+                '</tpl>'
+            );
+            tpl.overwrite(Ext.getBody(), memorySession);
+            
+        })
+    </script>
+</body>
+
+</html>

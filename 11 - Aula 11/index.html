@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../extjs/resources/css/ext-all.css">
+    <script type="text/javascript" src="../extjs/ext-all-dev.js"></script>
+    <title>Aula 11</title>
+</head>
+<body>
+    
+    <script>
+        Ext.define('Usuario',{
+            extend:'Ext.data.Model',
+            fields:[
+                {name : 'nome', type : 'string'},
+                {name : 'usuario', type : 'string'},
+                {name : 'senha' , type : 'string'},
+                {name : 'email', type : 'string',
+                    convert:function(value,record){
+                        return record.get('nome') + '@email.com'
+                    }
+                }
+            ]
+        });
+
+        Ext.onReady(function(){
+
+            let usuario = Ext.create('Usuario',{
+                nome : 'pedro',
+                usuario : 'pedro123',
+                senha : 'pedro123'
+            })
+            console.log(usuario.set('nome', 'pedro1'))
+            console.log(usuario.get('nome'))
+        });
+
+    </script>
+</body>
+</html>

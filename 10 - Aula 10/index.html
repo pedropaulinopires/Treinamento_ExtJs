@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="extjs/resources/css/ext-all.css">
+    <script type="text/javascript" src="extjs/ext-all-dev.js"></script>
+    <title>Aula 10</title>
+</head>
+
+<body>
+
+    <script>
+        Ext.Loader.setConfig({
+            enabled:true,
+            paths:{
+                'Aula10' : 'js'
+            }
+        })
+                
+        Ext.onReady(function () {
+            let usuario = Ext.create('Aula10.classes.Usuario')
+            usuario.setNome("pedro")
+            console.log(usuario.getNome())
+
+            
+        })
+
+    </script>
+</body>
+
+</html>

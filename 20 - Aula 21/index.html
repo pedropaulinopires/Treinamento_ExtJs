@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../extjs/resources/css/ext-all.css">
+    <script type="text/javascript" src="../extjs/ext-all.js"></script>
+    <title>Aula 21</title>
+</head>
+
+<body>
+
+    <script>
+        //criação da model!
+        Ext.define('Contato', {
+            extend: 'Ext.data.Model',
+            fields: [
+                { name: 'id', type: 'int' },
+                { name: 'nome', type: 'string' },
+                { name: 'email', type: 'string' }
+            ]
+        })
+
+        //store com proxy ajax
+        Ext.define('UsuarioStore', {
+            extend: 'Ext.data.Store',
+            model:'Contato',
+            proxy: {
+                type: 'ajax',
+                
+                reader: {
+                    type: 'json',
+                },
+                writer: {
+                    type: 'json',
+                    
+                },
+                api: {
+                    create: 'http://localhost:8080/contato/salvar',
+                    read: 'http://localhost:8080/contatos',
+                    update: 'http://localhost:8080/contatos',
+                    destroy: 'http://localhost:8080/contato/deletar'
+                },
+               
+            },
+            //autoLoad: true
+        })
+
+        Ext.onReady(function(){
+            
+
+            let contato = Ext.create('Contato',{
+                id:1,
+                nome : 'pedroteste',
+                email: 'pedroteste@email.com'
+            })
+            
+            let store = Ext.create('UsuarioStore').load()
+
+            store.on('load',function(s){
+                s.removeAll()
+                console.log(s.data.items)
+            })
+           
+        })
+    </script>
+</body>
+
+</html>

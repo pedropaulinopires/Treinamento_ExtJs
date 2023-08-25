@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../extjs/resources/css/ext-all.css">
+    <script type="text/javascript" src="../extjs/ext-all.js"></script>
+    <title>Document</title>
+</head>
+<body>
+    
+    <script>
+        Ext.define('Contato',{
+            extend:'Ext.data.Model',
+            fields:[
+                { name : 'id', type: 'int'},
+                { name : 'nome', type: 'string'},
+                { name : 'email', type: 'string'}
+            ]
+        })
+
+        Ext.define('Req',{
+            extend:'Ext.data.Store',
+            model:'Contato',
+            proxy:{
+                type:'rest',
+                url:'http://localhost:8080/contatos',
+                header:{
+                    type:'json'
+                },
+                writer:{
+                    type:'json'
+                }
+            }
+        })
+
+        Ext.onReady(function(){
+            
+            let usuario = Ext.create('Contato',{
+                nome:'Teste',
+                email: 'teste@email.com'
+            })
+
+            let req = Ext.create('Req').load()
+            req.on('load',function(){
+                req.remove(req.getAt(3))
+                req.sync()
+            })
+
+        })
+    </script>
+</body>
+</html>

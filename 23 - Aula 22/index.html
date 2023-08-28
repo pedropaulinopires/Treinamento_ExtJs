@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../extjs/resources/css/ext-all.css">
+    <script type="text/javascript" src="../extjs/ext-all-dev.js"></script>
+    <title>Aula 20</title>
+</head>
+<body>
+    <div id="usuarios" style="padding: 25px;"></div>
+    <script>
+        Ext.define('Usuario',{
+            extend:'Ext.data.Model',
+            fields:[
+                {name : "id", type : "int"},
+                {name : "nome", type : "string"},
+                {name : "email", type : "string"},
+                {name : "senha", type : "string"}
+            ],
+            validation:[
+                {type:'presence', field:'nome'},
+                {type:'presence', field:'email'},
+                {type:'presence', field:'senha'},
+                {type:'length', field:'nome', min:2, max :150},
+                {type:'length', field:'email',min:8, max :150},
+                {type:'length', field:'senha',min:8, max :150}
+            ]
+        })
+        Ext.define('StoreUsuario',{
+            extend:'Ext.data.Store',
+            model:'Usuario',
+            proxy:{
+                type:'rest',
+                url:'http://localhost:8080/usuarios',
+
+                header:{
+                    type:'json'
+                },
+
+                write:{
+                    type:'json'
+                }
+            },
+            filters:[
+                {property:'nome',value:/.P$/}
+            ]
+        })
+      
+        Ext.onReady(function(){
+            let usuario = Ext.create('Usuario',{
+                id:'',
+                nome:'Rodrigo',
+                email:'rodrigo@email.com',
+                senha:'rodrigo123456'
+            })
+            
+            let tpl = Ext.create('Ext.XTemplate',
+                '<h1>Usuarios</h1>',
+                '<tpl for=".">',
+                    '<p> {data.id} - {data.nome} - {data.email} - {data.senha}</p>'
+                    ,'</tpl>'
+  
+            )
+
+            let storeUsuario = Ext.create('StoreUsuario').load()
+
+            storeUsuario.on('load',function(s){
+                tpl.overwrite("usuarios",s.data.items)
+            })
+        })
+    </script>
+</body>
+</html>
